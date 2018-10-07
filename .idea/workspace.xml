@@ -13,10 +13,7 @@
     </ADDITIONAL_GENERATION_ENVIRONMENT>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f6bb298-6acd-44ef-a690-3e53d932b705" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thread.c" afterPath="$PROJECT_DIR$/thread.c" />
-    </list>
+    <list default="true" id="1f6bb298-6acd-44ef-a690-3e53d932b705" name="Default" comment="" />
     <list id="545d2068-33ea-404e-a04b-f9cba7083dbd" name="Rejected commit: Default" comment="update set.c" />
     <ignored path="Test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -546,7 +543,7 @@
       <workItem from="1514378638989" duration="1628000" />
       <workItem from="1514807676462" duration="4304000" />
       <workItem from="1538879194177" duration="5163000" />
-      <workItem from="1538888016177" duration="3715000" />
+      <workItem from="1538888016177" duration="3833000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1511700850608</created>
@@ -559,7 +556,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="305125000" />
+    <option name="totallyTimeSpent" value="305243000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">

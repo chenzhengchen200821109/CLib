@@ -39,7 +39,7 @@ T Ring_ring(void *x, ...)
     return ring;
 }
 
-void Ring_free(T *ring)
+void Ring_free_v1(T *ring)
 {
     struct node *p, *q;
     assert(ring && *ring);
@@ -49,6 +49,22 @@ void Ring_free(T *ring)
             q = p->rlink;
             FREE(p);
         }
+    }
+    FREE(*ring);
+}
+
+void Ring_free_v2(T *ring)
+{
+    struct node *prev, *p, *q;
+    assert(ring && *ring);
+    if ((p = (*ring)->head) != NULL) {
+        prev = p->llink;
+        prev->rlink = NULL;
+        do {
+            q = p->rlink;
+            FREE(p);
+            p = q;
+        } while (p != NULL);
     }
     FREE(*ring);
 }

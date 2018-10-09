@@ -2,8 +2,8 @@
 // Created by chenzheng on 19/06/2017.
 //
 
-#ifndef CLIB_AP_H
-#define CLIB_AP_H
+#ifndef _AP_H_
+#define _AP_H_
 #include <stdarg.h>
 
 #define T AP_T
@@ -33,4 +33,4 @@ extern T AP_rshift(T x, int s);
 extern int AP_cmp(T x, T y);
 extern int AP_cmpi(T x, long int y);
 
-#endif //CLIB_AP_H
+#endif // _AP_H_

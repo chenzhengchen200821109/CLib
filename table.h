@@ -2,8 +2,8 @@
 // Created by chenzheng on 02/07/2017.
 //
 
-#ifndef CLIB_TABLE_H
-#define CLIB_TABLE_H
+#ifndef _TABLE_H_
+#define _TABLE_H_
 #define T Table_T
 typedef struct T *T;
 
@@ -17,4 +17,4 @@ extern void Table_map(T table, void apply(const void *key, void **value, void *c
 extern void **Table_toArray(T table, void *end);
 
 #undef T
-#endif //CLIB_TABLE_H
+#endif // _TABLE_H_

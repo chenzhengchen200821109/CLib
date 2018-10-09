@@ -2,10 +2,8 @@
 // Created by chenzheng on 30/12/2016.
 //
 
-#ifndef TEST_ADT_H
-#define TEST_ADT_H
-
-#endif //TEST_ADT_H
+#ifndef _ADT_H_
+#define _ADT_H_
 
 typedef struct {
     int *elems;
@@ -33,3 +31,5 @@ void StackNew_g(Stack_g *s, int elemSize);
 void StackDispose_g(Stack_g *s);
 void StackPush_g(Stack_g *s, void *elemAddr);
 void StackPop_g(Stack_g *s, void *elemAddr);
+
+#endif // _ADT_H_

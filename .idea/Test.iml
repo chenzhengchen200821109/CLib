@@ -2,14 +2,13 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/thread.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/text.c" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/chan.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sem.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/text.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/thread.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/seq.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sem.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/mem.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/mem_product.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sieve.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/seq.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/assert_v.h" isTestSource="false" />
@@ -17,10 +16,14 @@
       <sourceFolder url="file://$MODULE_DIR$/thread.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/assert_v.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/except_v.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/array.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/table.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/except_v.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sort.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/array.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/array.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/table.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chan.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ring.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chan.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/seq_test.c" isTestSource="false" />

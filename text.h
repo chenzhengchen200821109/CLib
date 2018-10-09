@@ -2,8 +2,8 @@
 // Created by chenzheng on 11/12/2017.
 //
 
-#ifndef CLIB_TEXT_H
-#define CLIB_TEXT_H
+#ifndef _TEXT_H_
+#define _TEXT_H_
 
 #include <stdarg.h>
 #define T Text_T
@@ -48,4 +48,4 @@ extern void Text_fmt(int code, va_list *app, int put(int c, void *cl), void *cl,
 extern Text_save_T Text_save(void);
 extern void Text_restore(Text_save_T *save);
 
-#endif //CLIB_TEXT_H
+#endif // _TEXT_H_

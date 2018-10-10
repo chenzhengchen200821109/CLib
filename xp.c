@@ -177,6 +177,23 @@ int XP_div(int n, T q, T x, int m, T y, T r, T tmp)
                         qk = BASE - 1;
                 }
             }
+            q[k] = qk;
+            // rem <- rem - dq*b^k
+            {
+                int borrow;
+                assert(0 <= k && k <= k+m);
+                borrow = XP_sub(m+1, &rem[k], &rem[k], dq, 0);
+            }
         }
     }
+    return 1;
+}
+
+int XP_cmp(int n, T x, T y)
+{
+    int i = n - 1;
+
+    while (i > 0 && x[i] == y[i])
+        i--;
+    return x[i] - y[i];
 }

@@ -2,8 +2,8 @@
 // Created by chenzheng on 07/10/2018.
 //
 
-#ifndef CLIB_CHAN_H
-#define CLIB_CHAN_H
+#ifndef _CHAN_H_
+#define _CHAN_H_
 
 #define T Chan_T
 typedef struct T *T;
@@ -21,4 +21,4 @@ extern int Chan_send(T c, const void* ptr, int size);
 extern int Chan_receive(T c, void* ptr, int size);
 
 #undef T
-#endif //CLIB_CHAN_H
+#endif // _CHAN_H_

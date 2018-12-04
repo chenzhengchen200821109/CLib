@@ -8,6 +8,7 @@
 #include <signal.h>
 #include <sys/time.h>
 #include <assert.h>
+#include <execinfo.h>
 //#include "assert_v.h"
 //#include "except_v.h"
 #include "mem.h"
@@ -86,7 +87,7 @@ static struct Thread* ready = NULL;
  */
 extern void _swtch(struct TContext* from, struct TContext* to);
 
-int TContext_init(struct TContext* context)
+void TContext_init(struct TContext* context)
 {
     memset(context, 0, sizeof(*context));
 }
@@ -176,14 +177,13 @@ static void run(void)
     _swtch(&(t->context), &(current->context));
 }
 
-
-/* static void testalert(void)
+static void testalert(void)
 {
     if (current->alerted) {
         current->alerted = 0;
-        //RAISE(Thread_Alerted);
+        err_sys("Thread Alerted", __FILE__, __LINE__);
     }
-} */
+}
 
 /*
  * release all threads.
@@ -202,46 +202,63 @@ static void release(void)
     } while(0);
 }
 
-//static int interrupt(int sig, int code, struct sigcontext *scp)
-//{
-//    if (critical || scp->sc_pc >= (unsigned long)_MONITOR && scp->sc_pc <= (unsigned long)_ENDMONITOR)
-//        return 0;
-//    put(current, &ready);
-//    sigsetmask(scp->sc_mask);
-//    run();
-//    return 0;
-//}
+static int interrupt(int sig, struct sigcontext ctx)
+{
+    if (critical || ctx.eip >= (unsigned int)_MONITOR &&
+            ctx.eip <= (unsigned int)_ENDMONITOR)
+        return 0;
+    put(current, &ready);
+    //sigsetmask(ctx.sig);
+    run();
+    return 0;
+}
 
 /* 
  * Thread_init() must be called only once.
  */
 int Thread_init(int preempt)
 {
+    stack_t ss;
     assert(preempt == 0 || preempt == 1);
     assert(current == NULL);
     root.handle = &root;
     current = &root;
     nthreads = 1;
-    //if (preempt) {
+    if (preempt) {
         // initialize preemptive scheduling
-        //{
-        //    struct sigaction sa;
-        //    memset(&sa, '\0', sizeof(sa));
-        //    sa.sa_handler = (void (*)())interrupt;
-        //    if (sigaction(SIGVTALRM, &sa, NULL) < 0)
-        //        return 0;
-        //}
-        //{
-        //    struct itimerval it;
-        //    it.it_value.tv_sec = 0;
-        //    it.it_value.tv_usec = 50;
-        //    it.it_interval.tv_sec = 0;
-        //    it.it_interval.tv_usec = 50;
-        //    if (setitimer(ITIMER_VIRTUAL, &it, NULL) < 0)
-        //        return 0;
-        //}
-    //}
-    return 0;
+        {
+            ss.ss_sp = malloc(SIGSTKSZ);
+            if (ss.ss_sp == NULL)
+                return -1;
+            ss.ss_size = SIGSTKSZ;
+            ss.ss_flags = 0;
+            if (sigaltstack(&ss, NULL) == -1)
+                return -1;
+            struct sigaction sa;
+            memset(&sa, '\0', sizeof(sa));
+            sa.sa_handler = (void (*)(int))interrupt;
+            sa.sa_flags = SA_ONSTACK;
+            /*
+             * ITIMER_VIRTUAL - This timer counts down against
+             * the user-mode CPU time consumed by the process.
+             * (The measurement includes CPU time consumed by all
+             * threads in the process.) At each expiration, a 
+             * SIGVTALRM signal is generated.
+             */
+            if (sigaction(SIGALRM, &sa, NULL) < 0)
+                return -1;
+        }
+        {
+            struct itimerval it;
+            it.it_value.tv_sec = 0;
+            it.it_value.tv_usec = 50;
+            it.it_interval.tv_sec = 0;
+            it.it_interval.tv_usec = 50;
+            if (setitimer(ITIMER_REAL, &it, NULL) < 0)
+                return -1;
+        }
+    }
+    return preempt;
 }
 
 struct Thread* Thread_self(void)
@@ -341,9 +358,10 @@ void Thread_alert(struct Thread* t)
 
 static int Thread_startup(struct Thread* t, void* arg)
 {
+    int result;
     if (t->startup)
-        t->startup(t->arg);
-    Thread_exit(0);
+        result = t->startup(t->arg);
+    Thread_exit(result);
 }
 
 /*

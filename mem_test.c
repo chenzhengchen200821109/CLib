@@ -5,6 +5,7 @@ int main()
 {
     int a;
     int* pa = &a;
+    FREE(pa);
     int* pb;
     pa = (int *)ALLOC(100);
     pb = pa;

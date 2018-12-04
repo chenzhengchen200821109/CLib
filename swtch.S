@@ -48,5 +48,6 @@ _swtch:
 #    call *%ebx
 #    call Thread_exit;
 
-#.global __ENDMONITOR
-#__ENDMONITOR:
+.global _ENDMONITOR
+.type _ENDMONITOR, @function
+_ENDMONITOR:

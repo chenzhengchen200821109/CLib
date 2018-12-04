@@ -82,7 +82,8 @@ void append_int(struct node_int **headRef, int data) {
 /*
  * pop() function is the opposite of push(), it pops value from the front of the list.
  */
-int pop_int(struct node_int **headRef) {
+int pop_int(struct node_int **headRef) 
+{
     int data;
     struct node_int *current = *headRef;
 

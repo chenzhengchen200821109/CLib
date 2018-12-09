@@ -27,9 +27,5 @@ extern void Thread_pause(void);
 extern void Thread_start();
 
 #undef T
-<<<<<<< Updated upstream
 #endif // _THREAD_H
-=======
 
-#endif
->>>>>>> Stashed changes

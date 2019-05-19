@@ -9,12 +9,12 @@
 #include <sys/time.h>
 #include <assert.h>
 #include <execinfo.h>
-//#include "assert_v.h"
-//#include "except_v.h"
+#include "assert_v.h"
+#include "except_v.h"
 #include "mem.h"
 #include "thread.h"
 #include "error.h"
-//#include "sem.h"
+#include "sem.h"
 
 #define isempty(q) ((q) == NULL)
 
@@ -204,8 +204,8 @@ static void release(void)
 
 static int interrupt(int sig, struct sigcontext ctx)
 {
-    if (critical || ctx.eip >= (unsigned int)_MONITOR &&
-            ctx.eip <= (unsigned int)_ENDMONITOR)
+    if (critical || (ctx.eip >= (unsigned int)_MONITOR &&
+            ctx.eip <= (unsigned int)_ENDMONITOR))
         return 0;
     put(current, &ready);
     //sigsetmask(ctx.sig);
@@ -362,6 +362,7 @@ static int Thread_startup(struct Thread* t, void* arg)
     if (t->startup)
         result = t->startup(t->arg);
     Thread_exit(result);
+    return 0;
 }
 
 /*

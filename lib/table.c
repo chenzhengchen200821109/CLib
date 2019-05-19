@@ -61,10 +61,13 @@ void *Table_get(T table, const void *key)
     struct binding *p;
     assert(table);
     assert(key);
-    i = (*table->hash)(key)%table->size;
-    for (p = table->buckets[i]; p; p->link )
+
+    i = (*table->hash)(key) % (table->size);
+
+    for (p = table->buckets[i]; p; p = p->link) {
         if ((*table->cmp)(key, p->key) == 0)
             break;
+    }
 
     return p ? p->value : NULL;
 }
@@ -78,9 +81,10 @@ void *Table_put(T table, const void *key, void *value)
     assert(table);
     assert(key);
     i = (*table->hash)(key) % table->size;
-    for ( p = table->buckets[i]; p; p->link )
+    for ( p = table->buckets[i]; p; p = p->link ) {
         if ((*table->cmp)(key, p->key) == 0)
             break;
+    }
     if (p == NULL) {
         NEW(p);
         p->key = key;
@@ -121,7 +125,7 @@ void Table_map(T table, void apply(const void *key, void **value, void *cl), voi
 void *Table_remove(T table, const void *key)
 {
     int i;
-    unsigned stamp;
+    //unsigned stamp;
     struct binding **pp;
 
     assert(table);

@@ -31,5 +31,5 @@ extern T *Sem_new(int count);
 extern void Sem_wait(T *s);
 extern void Sem_signal(T *s);
 
-#undef
+#undef T
 #endif // _SEM_H_
